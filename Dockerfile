@@ -6,7 +6,7 @@
 #    By: rpet <marvin@codam.nl>                       +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/13 10:57:35 by rpet          #+#    #+#                  #
-#    Updated: 2020/01/23 14:07:48 by rpet          ########   odam.nl          #
+#    Updated: 2020/01/24 09:16:46 by rpet          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,11 @@ RUN apt-get update && apt-get install -y \
 	sendmail
 
 # configuration Nginx
-COPY srcs/nginx.conf /tmp/
-RUN cp /tmp/nginx.conf /etc/nginx/sites-available/default
+COPY srcs/nginx.conf /etc/nginx/sites-available/default
 
 # configuration SSL
 RUN wget -O mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.4.1/mkcert-v1.4.1-linux-amd64 && \
-	chmod +x /mkcert && ./mkcert -install && ./mkcert localhost && mv /localhost.pem /localhost-key.pem /tmp
+	chmod +x /mkcert && ./mkcert -install && ./mkcert localhost && mv /localhost.pem /localhost-key.pem /root
 
 # configuration MySQL
 RUN service mysql start && \
